@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Layout from "../../../components/layout";
 import endpoints from "../../../lib/endpoints";
 
@@ -30,6 +31,9 @@ export async function getStaticProps({ params }) {
 function Post({ post }) {
   return (
     <Layout>
+      <Head>
+        <title>{post.title}</title>
+      </Head>
       <h1>{post.title}</h1>
       <p>{post.body}</p>
     </Layout>
