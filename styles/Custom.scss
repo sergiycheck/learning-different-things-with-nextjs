@@ -55,7 +55,7 @@
   z-index: 1;
 }
 
-.section {
+@mixin sectionMixin {
   position: relative;
   height: 100vh;
   display: flex;
@@ -65,29 +65,48 @@
   text-shadow: 0 0 5px #000;
 }
 
-.parallax::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  background-color: rgba($indigo-500, 0.3);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+@mixin parallax_pseudo_after {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: rgba($indigo-500, 0.3);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
 }
 
-.static {
+@mixin staticMixin {
   background-color: $teal-100;
 }
 
-.bg1::after {
-  background-image: url("https://placekitten.com/g/900/700");
+@mixin bg_pseudo($pseudoEl, $imageUrl) {
+  &::#{$pseudoEl} {
+    background-image: url($imageUrl);
+  }
 }
 
-.bg2::after {
-  background-image: url("https://placekitten.com/g/800/600");
+.sectionParallaxedWithBg1 {
+  @include sectionMixin;
+  @include parallax_pseudo_after;
+
+  @include bg_pseudo("after", "https://placekitten.com/g/900/700");
+}
+
+.sectionStatic {
+  @include sectionMixin;
+  @include staticMixin;
+}
+
+.sectionParallaxedWithBg2 {
+  @include sectionMixin;
+  @include parallax_pseudo_after;
+
+  @include bg_pseudo("after", "https://placekitten.com/g/800/600");
 }

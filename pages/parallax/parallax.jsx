@@ -16,13 +16,13 @@ export default function Parallax() {
             </div>
           </div>
 
-          <section className="section parallax bg1">
+          <section className="sectionParallaxedWithBg1">
             <h1>Cute Kitten</h1>
           </section>
-          <section className="section static">
+          <section className="sectionStatic">
             <h1>Just color</h1>
           </section>
-          <section className="section parallax bg2">
+          <section className="sectionParallaxedWithBg2">
             <h1>Fluffy Kitten</h1>
           </section>
         </div>
