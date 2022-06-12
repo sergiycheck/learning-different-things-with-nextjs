@@ -1,17 +1,19 @@
 import Head from "next/head";
 import Link from "next/link";
-import Layout from "../components/layout";
-import styles from "../styles/Home.module.css";
-import endpoints from "../lib/endpoints";
+import Layout from "../../components/layout";
+import styles from "../../styles/Home.module.css";
+import endpoints from "../../lib/endpoints";
 
 // This function gets called at build time
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts
-  const res = await fetch(endpoints.posts);
-  const posts = await res.json();
+export async function getServerSideProps({ req, res }) {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
+  const result = await fetch(endpoints.posts);
+  const posts = await result.json();
+
   return {
     props: {
       posts,
@@ -19,7 +21,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ posts }) {
+export default function ServerSideHome({ posts }) {
   let renderedPosts;
   if (!posts) {
     renderedPosts = <div> not posts found</div>;
@@ -28,9 +30,7 @@ export default function Home({ posts }) {
       <ul className={styles.grid}>
         {posts.map((post, i) => (
           <li className={styles.card} key={i}>
-            <Link href={`/blog/posts/${post.id}`}>
-              <a>{post.title}</a>
-            </Link>
+            <span>{post.title}</span>
           </li>
         ))}
       </ul>
@@ -45,9 +45,7 @@ export default function Home({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className={styles.title}>
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
+      <h1 className={styles.title}>Server Side Posts</h1>
       {renderedPosts}
     </Layout>
   );
