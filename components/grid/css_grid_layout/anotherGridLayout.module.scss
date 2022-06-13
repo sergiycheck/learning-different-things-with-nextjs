@@ -1,0 +1,175 @@
+.listChooseLayout {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 1rem;
+
+  .liChooseOption {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+
+@mixin responsive3FrMixin {
+  @media screen and (min-width: 400px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@mixin fullSizeGridColoredChildDivMixin {
+  display: grid;
+  min-height: 100vh;
+  font-size: calc(15px + 0.390625vw);
+  gap: 1rem;
+
+  div {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(0, 128, 128, 0.795);
+    background-color: rgba(0, 128, 128, 0.658);
+  }
+}
+
+.wrapper {
+  @include responsive3FrMixin();
+  @include fullSizeGridColoredChildDivMixin();
+}
+
+.wrapper_static_cols {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: repeat(3, 200px);
+}
+
+.wrapper1_2fr_2_1fr {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: 2fr repeat(2, 1fr);
+}
+
+.wrapperMixingFlexibleAbsolute {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: 500px 1fr 2fr;
+}
+
+.wrapper20pxRepeat620px {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: 20px repeat(6, 1fr) 20px;
+}
+
+.wrapperRepeater5_1fr_2fr {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: repeat(5, 1fr 2fr);
+}
+
+.wrapperGridTracks {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+}
+
+.wrapperGridTracksAutoRows {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  // This means automatically created rows will
+  // be a minimum of 100 pixels tall, and a maximum of auto.
+}
+
+.wrapperAutoBoxesWithStyles {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px;
+
+  [class~="box1"] {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  [class~="box2"] {
+    grid-column-start: 1;
+    grid-row-start: 3;
+    grid-row-end: 5;
+  }
+}
+
+.wrapperAutoBoxesWithStyles_linePositioning {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px;
+
+  [class~="box1"] {
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+  }
+
+  [class~="box2"] {
+    grid-column: 1;
+    grid-row: 3 / 5;
+  }
+}
+
+.wrapperAutoBoxesWithStyles_linePositioning_NestedBox1 {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px;
+
+  [class~="box1"] {
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  [class~="box2"] {
+    grid-column: 1;
+    grid-row: 3 / 5;
+  }
+}
+
+.wrapperAutoBoxesWithStylesOverlap {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 150px;
+
+  [class~="box1"] {
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+  }
+
+  [class~="box2"] {
+    grid-column: 1;
+    grid-row: 2 / 5;
+  }
+}
+
+.wrapperAutoBoxesWithStylesOverlapControlOrder {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+
+  [class~="box1"] {
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+    z-index: 2;
+  }
+
+  [class~="box2"] {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    z-index: 1;
+  }
+}

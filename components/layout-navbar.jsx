@@ -16,6 +16,10 @@ export default function LayoutNavBar({ children }) {
         <Link href="/parallax/parallax">
           <a>Parallax Page</a>
         </Link>
+        {" | "}
+        <Link href="/grid/css_grid_layout/gridLayout">
+          <a>grid layout example</a>
+        </Link>
       </nav>
 
       {children}
