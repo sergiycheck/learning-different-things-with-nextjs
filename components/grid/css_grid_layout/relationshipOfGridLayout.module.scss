@@ -1,0 +1,126 @@
+@import "shared_grid_styles";
+
+@mixin centeredFullHeightFlexMixin {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  min-height: 100vh;
+  font-size: calc(15px + 0.390625vw);
+  gap: 1rem;
+}
+
+.wrapperFlex {
+  @include centeredFullHeightFlexMixin();
+
+  width: 500px;
+
+  @include coloredWrapperNestedDiv();
+
+  div {
+    flex: 1 1 150px;
+  }
+}
+
+.wrapperGrid {
+  @include fullSizeGridColoredChildDivMixin();
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.wrapperFlexWithAlignedBoxes {
+  @include centeredFullHeightFlexMixin();
+
+  width: 500px;
+
+  @include coloredWrapperNestedDiv();
+
+  div {
+    flex: 1 1 150px;
+  }
+  align-items: flex-end;
+
+  [class~="box1"] {
+    align-self: stretch;
+  }
+
+  [class~="box2"] {
+    align-self: flex-start;
+  }
+}
+
+.wrapperGridWithAlignedBoxes {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  grid-auto-rows: minmax(200px, auto);
+
+  [class~="box1"] {
+    align-self: stretch;
+  }
+
+  [class~="box2"] {
+    align-self: start;
+  }
+}
+
+.wrapperGridAutoFillBoxes200px {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-auto-rows: minmax(200px, auto);
+}
+
+.wrapperGridFlexibleNumOfTracks {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: minmax(200px, auto);
+}
+
+.wrapperGridWithAbsolutelyPositionedBox {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  position: relative;
+
+  [class~="box3"] {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row: 1 / 3;
+    position: absolute;
+  }
+}
+
+.wrapperGridWithAbsolutelyPositionedBoxNestedInBox3 {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  position: relative;
+
+  [class~="box3"] {
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+    position: relative;
+
+    [class~="abspos"] {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+    }
+  }
+}
+
+.wrapperGridDisplayContents {
+  @include fullSizeGridColoredChildDivMixin();
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  position: relative;
+
+  [class~="box1"] {
+    grid-column: 1 / 4;
+    display: contents;
+  }
+}

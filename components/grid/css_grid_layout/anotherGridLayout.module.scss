@@ -1,15 +1,4 @@
-.listChooseLayout {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  gap: 1rem;
-
-  .liChooseOption {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-}
+@import "shared_grid_styles";
 
 @mixin responsive3FrMixin {
   @media screen and (min-width: 400px) {
@@ -22,20 +11,6 @@
 
   @media screen and (min-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@mixin fullSizeGridColoredChildDivMixin {
-  display: grid;
-  min-height: 100vh;
-  font-size: calc(15px + 0.390625vw);
-  gap: 1rem;
-
-  div {
-    border-radius: 0.5rem;
-    padding: 1rem;
-    border: 1px solid rgba(0, 128, 128, 0.795);
-    background-color: rgba(0, 128, 128, 0.658);
   }
 }
 

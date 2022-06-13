@@ -13,6 +13,10 @@ export default function LayoutNavBarGridExamples({ children }) {
           <a>another grid layout</a>
         </Link>
         {" | "}
+        <Link href="/grid/css_grid_layout/relationshipOfGridLayout">
+          <a>relationship of grid layout</a>
+        </Link>
+        {" | "}
       </nav>
 
       {children}

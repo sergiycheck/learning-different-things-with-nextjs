@@ -1,0 +1,30 @@
+.listChooseLayout {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 1rem;
+
+  .liChooseOption {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+
+@mixin coloredWrapperNestedDiv {
+  div {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(0, 128, 128, 0.795);
+    background-color: rgba(0, 128, 128, 0.658);
+  }
+}
+
+@mixin fullSizeGridColoredChildDivMixin {
+  display: grid;
+  min-height: 100vh;
+  font-size: calc(15px + 0.390625vw);
+  gap: 1rem;
+
+  @include coloredWrapperNestedDiv();
+}
